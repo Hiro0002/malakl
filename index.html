@@ -202,6 +202,7 @@
     }
     </style>
 <base target="_blank">
+<base target="_blank">
 </head>
 <body>
     <!-- Music Start Overlay -->
@@ -227,7 +228,7 @@
         <input type="range" id="volume" min="0" max="1" step="0.1" value="0.5">
     </div>
 
-    <audio id="birthday-song" loop>
+    <audio id="birthday-song" loop preload="metadata">
         <source src="song.mp3.mp3" type="audio/mp3">
     </audio>
 
@@ -238,6 +239,35 @@
         const volumeControl = document.getElementById('volume');
         const musicOverlay = document.getElementById('musicOverlay');
         const startMusicBtn = document.getElementById('startMusicBtn');
+
+        // Restore audio state from previous page (if coming back)
+        function restoreAudioState() {
+            const savedTime = localStorage.getItem('audioTime');
+            const savedPaused = localStorage.getItem('audioPaused');
+            const savedVolume = localStorage.getItem('audioVolume');
+
+            if (savedVolume !== null) {
+                audio.volume = parseFloat(savedVolume);
+                volumeControl.value = parseFloat(savedVolume);
+            }
+
+            if (savedTime !== null) {
+                audio.currentTime = parseFloat(savedTime);
+            }
+
+            if (savedPaused === 'false') {
+                // Music was playing on previous page - try to resume
+                audio.play().then(() => {
+                    musicOverlay.classList.add('hidden');
+                    playPauseBtn.innerHTML = '<i>⏸️</i>';
+                }).catch(() => {
+                    // Autoplay blocked - show overlay
+                    playPauseBtn.innerHTML = '<i>▶️</i>';
+                });
+            } else {
+                playPauseBtn.innerHTML = '<i>▶️</i>';
+            }
+        }
 
         // Try to autoplay immediately (may be blocked by browser)
         function attemptAutoplay() {
@@ -274,21 +304,26 @@
             }
         });
 
-        // Attempt autoplay on page load
-        window.addEventListener('load', attemptAutoplay);
+        // On page load: restore state first, then try autoplay if no state found
+        window.addEventListener('load', () => {
+            restoreAudioState();
+            // If no saved state exists, try autoplay
+            if (localStorage.getItem('audioTime') === null) {
+                attemptAutoplay();
+            }
+        });
 
         // Save audio state before leaving
         function goToNextPage() {
-    // SAVE FIRST, then animate
-    localStorage.setItem('audioTime', audio.currentTime);
-    localStorage.setItem('audioPaused', audio.paused);
-    localStorage.setItem('audioVolume', audio.volume);
+            localStorage.setItem('audioTime', audio.currentTime);
+            localStorage.setItem('audioPaused', audio.paused);
+            localStorage.setItem('audioVolume', audio.volume);
 
-    gsap.to('.next-button', {
-        scale: 1.2, yoyo: true, repeat: 1, duration: 0.3,
-        onComplete: () => { window.location.href = "memorylane.html"; }
-    });
-}
+            gsap.to('.next-button', {
+                scale: 1.2, yoyo: true, repeat: 1, duration: 0.3,
+                onComplete: () => { window.location.href = "memorylane.html"; }
+            });
+        }
 
         // Standard Audio Controls
         playPauseBtn.addEventListener('click', () => {
@@ -302,6 +337,13 @@
         });
 
         volumeControl.addEventListener('input', () => { audio.volume = volumeControl.value; });
+
+        // Save state periodically while playing
+        setInterval(() => {
+            if (!audio.paused) {
+                localStorage.setItem('audioTime', audio.currentTime);
+            }
+        }, 1000);
 
         // Floating Elements Logic
         function createFloatingElements() {
