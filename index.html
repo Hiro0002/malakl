@@ -5,207 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy birthday Malokah</title>
     <style>
-    /* General Layout */
-    * { 
-        margin: 0; 
-        padding: 0; 
-        box-sizing: border-box; 
-        font-family: 'Comic Sans MS', cursive, sans-serif; 
-    }
-
-    body { 
-        background: linear-gradient(135deg, #ffcee6 0%, #ffd6f1 50%, #e4f9ff 100%); 
-        height: 100vh; 
-        overflow: hidden; 
-        display: flex; 
-        flex-direction: column; 
-        justify-content: center; 
-        align-items: center; 
-        position: relative; 
-    }
-
-    /* The Glass Box Container */
-    .container { 
-        text-align: center; 
-        z-index: 10; 
-        padding: 2rem; 
-        max-width: 800px; 
-        background-color: rgba(255, 255, 255, 0.2); 
-        border-radius: 20px; 
-        backdrop-filter: blur(5px); 
-        box-shadow: 0 8px 32px rgba(255, 105, 180, 0.3); 
-        transition: all 0.5s ease; 
-    }
-
-    /* Text and Animations */
-    h1 { 
-        font-size: 3.5rem; 
-        color: #FF1493; 
-        text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.8); 
-        margin-bottom: 1.5rem; 
-        opacity: 0; 
-        animation: bounce-in 1.5s forwards 0.5s; 
-    }
-
-    .subtitle { 
-        font-size: 1.8rem; 
-        color: #8A2BE2; 
-        margin-bottom: 2rem; 
-        text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.6); 
-        opacity: 0; 
-    }
-
-    .next-button { 
-        padding: 1rem 3rem; 
-        font-size: 1.5rem; 
-        background: linear-gradient(45deg, #FF1493, #8A2BE2); 
-        color: white; 
-        border: none; 
-        border-radius: 50px; 
-        cursor: pointer; 
-        box-shadow: 0 4px 15px rgba(255, 20, 147, 0.5); 
-        transition: all 0.3s ease; 
-        opacity: 0; 
-        animation: fade-in 1s forwards 3s; 
-    }
-
-    .next-button:hover {
-        transform: scale(1.05);
-        box-shadow: 0 6px 20px rgba(255, 20, 147, 0.7);
-    }
-
-    /* Typewriter & Floating elements */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Comic Sans MS', cursive, sans-serif; }
+    body { background: linear-gradient(135deg, #ffcee6 0%, #ffd6f1 50%, #e4f9ff 100%); height: 100vh; overflow: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; }
+    .container { text-align: center; z-index: 10; padding: 2rem; max-width: 800px; background-color: rgba(255, 255, 255, 0.2); border-radius: 20px; backdrop-filter: blur(5px); box-shadow: 0 8px 32px rgba(255, 105, 180, 0.3); transition: all 0.5s ease; }
+    h1 { font-size: 3.5rem; color: #FF1493; text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.8); margin-bottom: 1.5rem; opacity: 0; animation: bounce-in 1.5s forwards 0.5s; }
+    .subtitle { font-size: 1.8rem; color: #8A2BE2; margin-bottom: 2rem; text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.6); opacity: 0; }
+    .next-button { padding: 1rem 3rem; font-size: 1.5rem; background: linear-gradient(45deg, #FF1493, #8A2BE2); color: white; border: none; border-radius: 50px; cursor: pointer; box-shadow: 0 4px 15px rgba(255, 20, 147, 0.5); transition: all 0.3s ease; opacity: 0; animation: fade-in 1s forwards 3s; }
+    .next-button:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(255, 20, 147, 0.7); }
     .typewriter-container { display: inline-block; position: relative; overflow: hidden; height: 2.5rem; }
     .typewriter-text { white-space: nowrap; overflow: hidden; width: 0; animation: typewriter 3s steps(50) forwards 1.5s; }
     .cursor { position: absolute; right: -5px; width: 3px; height: 100%; background-color: #8A2BE2; animation: blink 0.8s infinite; }
-
     @keyframes bounce-in { 0% { transform: scale(0); opacity: 0; } 60% { transform: scale(1.1); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
     @keyframes fade-in { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
     @keyframes typewriter { from { width: 0; } to { width: 100%; } }
     @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-
-    /* Audio Controls */
-    .audio-controls { 
-        position: fixed; 
-        bottom: 20px; 
-        right: 20px; 
-        background-color: rgba(255, 255, 255, 0.7); 
-        padding: 10px; 
-        border-radius: 50px; 
-        display: flex; 
-        align-items: center; 
-        z-index: 100; 
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); 
-    }
-    .audio-controls button { 
-        background: none; 
-        border: none; 
-        font-size: 1.5rem; 
-        cursor: pointer; 
-        color: #FF1493; 
-        margin-right: 10px; 
-    }
+    .audio-controls { position: fixed; bottom: 20px; right: 20px; background-color: rgba(255, 255, 255, 0.7); padding: 10px; border-radius: 50px; display: flex; align-items: center; z-index: 100; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); }
+    .audio-controls button { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #FF1493; margin-right: 10px; }
     .audio-controls input { width: 100px; }
-
-    /* Corner Photos */
-    .corner-photo-container {
-        position: fixed;
-        top: 20px;
-        z-index: 9999;
-    }
+    .corner-photo-container { position: fixed; top: 20px; z-index: 9999; }
     .right { right: 20px; }
     .left { left: 20px; }
-
-    .styled-corner-photo {
-        width: 80px;
-        height: 80px;
-        object-fit: cover;
-        border-radius: 50%;
-        border: 3px solid #ffffff;
-        box-shadow: 0 0 15px rgba(255, 20, 147, 0.5);
-        transition: all 0.3s ease;
-        cursor: pointer;
-    }
-
-    .styled-corner-photo:hover {
-        transform: scale(1.15);
-        box-shadow: 0 0 25px rgba(255, 20, 147, 0.8);
-    }
-
-    /* Start Music Overlay */
-    .music-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(255, 206, 230, 0.85);
-        backdrop-filter: blur(8px);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        z-index: 10000;
-        transition: opacity 0.6s ease, visibility 0.6s ease;
-    }
-
-    .music-overlay.hidden {
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-    }
-
-    .music-overlay h2 {
-        font-size: 2.5rem;
-        color: #FF1493;
-        text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.8);
-        margin-bottom: 1rem;
-        animation: heartbeat 1.5s ease-in-out infinite;
-    }
-
-    .music-overlay p {
-        font-size: 1.2rem;
-        color: #8A2BE2;
-        margin-bottom: 2rem;
-    }
-
-    .start-music-btn {
-        padding: 1rem 3rem;
-        font-size: 1.5rem;
-        background: linear-gradient(45deg, #FF1493, #8A2BE2);
-        color: white;
-        border: none;
-        border-radius: 50px;
-        cursor: pointer;
-        box-shadow: 0 4px 20px rgba(255, 20, 147, 0.6);
-        transition: all 0.3s ease;
-        animation: pulse 2s infinite;
-    }
-
-    .start-music-btn:hover {
-        transform: scale(1.1);
-        box-shadow: 0 6px 30px rgba(255, 20, 147, 0.8);
-    }
-
-    @keyframes heartbeat {
-        0% { transform: scale(1); }
-        25% { transform: scale(1.05); }
-        50% { transform: scale(1); }
-        75% { transform: scale(1.05); }
-        100% { transform: scale(1); }
-    }
-
-    @keyframes pulse {
-        0% { transform: scale(1); box-shadow: 0 4px 20px rgba(255, 110, 196, 0.5); }
-        50% { transform: scale(1.05); box-shadow: 0 8px 30px rgba(255, 110, 196, 0.7); }
-        100% { transform: scale(1); box-shadow: 0 4px 20px rgba(255, 110, 196, 0.5); }
-    }
+    .styled-corner-photo { width: 80px; height: 80px; object-fit: cover; border-radius: 50%; border: 3px solid #ffffff; box-shadow: 0 0 15px rgba(255, 20, 147, 0.5); transition: all 0.3s ease; cursor: pointer; }
+    .styled-corner-photo:hover { transform: scale(1.15); box-shadow: 0 0 25px rgba(255, 20, 147, 0.8); }
+    .music-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 206, 230, 0.85); backdrop-filter: blur(8px); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10000; transition: opacity 0.6s ease, visibility 0.6s ease; }
+    .music-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .music-overlay h2 { font-size: 2.5rem; color: #FF1493; text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.8); margin-bottom: 1rem; animation: heartbeat 1.5s ease-in-out infinite; }
+    .music-overlay p { font-size: 1.2rem; color: #8A2BE2; margin-bottom: 2rem; }
+    .start-music-btn { padding: 1rem 3rem; font-size: 1.5rem; background: linear-gradient(45deg, #FF1493, #8A2BE2); color: white; border: none; border-radius: 50px; cursor: pointer; box-shadow: 0 4px 20px rgba(255, 20, 147, 0.6); transition: all 0.3s ease; animation: pulse 2s infinite; }
+    .start-music-btn:hover { transform: scale(1.1); box-shadow: 0 6px 30px rgba(255, 20, 147, 0.8); }
+    @keyframes heartbeat { 0% { transform: scale(1); } 25% { transform: scale(1.05); } 50% { transform: scale(1); } 75% { transform: scale(1.05); } 100% { transform: scale(1); } }
+    @keyframes pulse { 0% { transform: scale(1); box-shadow: 0 4px 20px rgba(255, 110, 196, 0.5); } 50% { transform: scale(1.05); box-shadow: 0 8px 30px rgba(255, 110, 196, 0.7); } 100% { transform: scale(1); box-shadow: 0 4px 20px rgba(255, 110, 196, 0.5); } }
     </style>
-<base target="_blank">
-<base target="_blank">
 </head>
 <body>
-    <!-- Music Start Overlay -->
+    <!-- Invisible audio bridge iframe -->
+    <iframe id="audioBridge" src="audio-bridge.html" style="position:fixed;width:0;height:0;border:0;z-index:-1;opacity:0;pointer-events:none;"></iframe>
+
     <div class="music-overlay" id="musicOverlay">
         <h2>🎵 Tap to Start the Music!</h2>
         <p>Click the button below to begin your birthday experience</p>
@@ -228,124 +63,58 @@
         <input type="range" id="volume" min="0" max="1" step="0.1" value="0.5">
     </div>
 
-    <audio id="birthday-song" loop preload="metadata">
-        <source src="song.mp3.mp3" type="audio/mp3">
-    </audio>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script>
-        const audio = document.getElementById('birthday-song');
+        const bridge = document.getElementById('audioBridge');
         const playPauseBtn = document.getElementById('play-pause');
         const volumeControl = document.getElementById('volume');
         const musicOverlay = document.getElementById('musicOverlay');
         const startMusicBtn = document.getElementById('startMusicBtn');
+        
+        let isPlaying = false;
+        let currentVolume = 0.5;
 
-        // Restore audio state from previous page (if coming back)
-        function restoreAudioState() {
-            const savedTime = localStorage.getItem('audioTime');
-            const savedPaused = localStorage.getItem('audioPaused');
-            const savedVolume = localStorage.getItem('audioVolume');
-
-            if (savedVolume !== null) {
-                audio.volume = parseFloat(savedVolume);
-                volumeControl.value = parseFloat(savedVolume);
-            }
-
-            if (savedTime !== null) {
-                audio.currentTime = parseFloat(savedTime);
-            }
-
-            if (savedPaused === 'false') {
-                // Music was playing on previous page - try to resume
-                audio.play().then(() => {
-                    musicOverlay.classList.add('hidden');
-                    playPauseBtn.innerHTML = '<i>⏸️</i>';
-                }).catch(() => {
-                    // Autoplay blocked - show overlay
-                    playPauseBtn.innerHTML = '<i>▶️</i>';
-                });
-            } else {
-                playPauseBtn.innerHTML = '<i>▶️</i>';
-            }
+        function sendToBridge(action, data) {
+            bridge.contentWindow.postMessage({ action, ...data }, '*');
         }
 
-        // Try to autoplay immediately (may be blocked by browser)
-        function attemptAutoplay() {
-            const playPromise = audio.play();
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    // Autoplay worked! Hide overlay
-                    musicOverlay.classList.add('hidden');
-                    playPauseBtn.innerHTML = '<i>⏸️</i>';
-                }).catch(() => {
-                    // Autoplay blocked - show overlay for user to click
-                    playPauseBtn.innerHTML = '<i>▶️</i>';
-                });
-            }
+        function startMusic() {
+            isPlaying = true;
+            sendToBridge('play', { time: 0, volume: currentVolume });
+            musicOverlay.classList.add('hidden');
+            playPauseBtn.innerHTML = '<i>⏸️</i>';
         }
 
-        // Start music on user click
-        startMusicBtn.addEventListener('click', () => {
-            audio.play().then(() => {
-                musicOverlay.classList.add('hidden');
-                playPauseBtn.innerHTML = '<i>⏸️</i>';
-            }).catch(err => {
-                console.log('Playback failed:', err);
-            });
-        });
-
-        // Also allow clicking anywhere on the overlay
+        startMusicBtn.addEventListener('click', startMusic);
         musicOverlay.addEventListener('click', (e) => {
-            if (e.target === musicOverlay) {
-                audio.play().then(() => {
-                    musicOverlay.classList.add('hidden');
-                    playPauseBtn.innerHTML = '<i>⏸️</i>';
-                });
+            if (e.target === musicOverlay) startMusic();
+        });
+
+        playPauseBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                sendToBridge('pause', {});
+                isPlaying = false;
+                playPauseBtn.innerHTML = '<i>▶️</i>';
+            } else {
+                sendToBridge('play', { volume: currentVolume });
+                isPlaying = true;
+                playPauseBtn.innerHTML = '<i>⏸️</i>';
             }
         });
 
-        // On page load: restore state first, then try autoplay if no state found
-        window.addEventListener('load', () => {
-            restoreAudioState();
-            // If no saved state exists, try autoplay
-            if (localStorage.getItem('audioTime') === null) {
-                attemptAutoplay();
-            }
+        volumeControl.addEventListener('input', () => {
+            currentVolume = volumeControl.value;
+            sendToBridge('setVolume', { volume: currentVolume });
         });
 
-        // Save audio state before leaving
         function goToNextPage() {
-            localStorage.setItem('audioTime', audio.currentTime);
-            localStorage.setItem('audioPaused', audio.paused);
-            localStorage.setItem('audioVolume', audio.volume);
-
             gsap.to('.next-button', {
                 scale: 1.2, yoyo: true, repeat: 1, duration: 0.3,
                 onComplete: () => { window.location.href = "memorylane.html"; }
             });
         }
 
-        // Standard Audio Controls
-        playPauseBtn.addEventListener('click', () => {
-            if (audio.paused) {
-                audio.play();
-                playPauseBtn.innerHTML = '<i>⏸️</i>';
-            } else {
-                audio.pause();
-                playPauseBtn.innerHTML = '<i>▶️</i>';
-            }
-        });
-
-        volumeControl.addEventListener('input', () => { audio.volume = volumeControl.value; });
-
-        // Save state periodically while playing
-        setInterval(() => {
-            if (!audio.paused) {
-                localStorage.setItem('audioTime', audio.currentTime);
-            }
-        }, 1000);
-
-        // Floating Elements Logic
+        // Floating Elements
         function createFloatingElements() {
             const elements = ['🎈', '❤️', '✨', '🌸'];
             for (let i = 0; i < 30; i++) {
@@ -373,7 +142,6 @@
     <div class="corner-photo-container right">
         <img src="talakkuma.jpg" alt="Birthday Princess" class="styled-corner-photo">
     </div>
-
     <div class="corner-photo-container left">
         <img src="talakuuwud.jpg" alt="malak 2" class="styled-corner-photo">
     </div>
